@@ -114,6 +114,7 @@
     };
     function routerAction (routeObj){
         var routerItem = vipspa.routerMap[routeObj.url];
+        
         if(typeof routerItem==='undefined'){
             var defaultsRoute = vipspa.routerMap.defaults;
             routerItem = vipspa.routerMap[defaultsRoute];
@@ -128,6 +129,7 @@
             success: function(data, status, xhr){
                 $(vipspa.mainView).html(data);
                 loadScript(routerItem.controller);
+                loadCss(routerItem.styles);
             },
             error: function(xhr, errorType, error){
                 if($(vipspa.errorTemplateId).length===0){
@@ -151,6 +153,7 @@
         
         var script = document.createElement('script'),
             loaded;
+            
         script.setAttribute('src', src);
         script.onreadystatechange = script.onload = function() {
             script.onreadystatechange = null;
@@ -162,8 +165,24 @@
             }
             loaded = true;
         };
+        
         document.documentElement.appendChild(script);
     }
 
+    function loadCss(src,callback){
+        if(!src) return;
+        var head = document.getElementsByTagName('head')[0],
+            cssURL = src,
+            linkTag = document.createElement('link');
+
+         linkTag.href = cssURL;
+         linkTag.setAttribute('rel','stylesheet');
+         linkTag.setAttribute('media','all');
+         linkTag.setAttribute('type','text/css');
+
+         head.appendChild(linkTag);
+
+
+    }
     window.vipspa = new Vipspa();
 })();

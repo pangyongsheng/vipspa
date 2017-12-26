@@ -5,7 +5,8 @@ $(function(){
         router: {
             'home': {
                 templateUrl: 'views/home.html',
-                controller: 'js/app/home.js'
+                controller: 'js/app/home.js',
+                styles:'css/main.css'
             },
             'content': {
                 templateUrl: 'views/content.html',
