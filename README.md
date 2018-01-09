@@ -72,8 +72,7 @@ html代码
             router: {
                 'home': {
                     templateUrl: 'views/home.html',
-                    controller: 'js/app/home.js',
-                    styles:'css/main.css'
+                    controller: 'js/app/home.js'
                 },
                 'content': {
                     templateUrl: 'views/content.html',

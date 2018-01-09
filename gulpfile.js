@@ -6,10 +6,12 @@ var packageJson = require('./package.json'),
     stylish = require('jshint-stylish'),
     uglify = require('gulp-uglify'),
     del = require('del');
+    mincss=require('gulp-minify-css');
 
 var path = {};
 path.root="./";
 path.js = path.root + 'src/*.js';
+path.css = path.root + 'src/*.css';
 path.build = './build';
 path.example = [
     path.root + 'example/pure/www/lib/',
@@ -38,9 +40,13 @@ gulp.task('script', function() {
         .pipe(size())
         .pipe(gulp.dest(path.build));
 });
-
+gulp.task('css',function(){
+    gulp.src(path.css)
+        .pipe(mincss())
+        .pipe(gulp.dest(path.build));
+})
 gulp.task('watch', function () {
     gulp.watch([path.js], ['script']);
 });
 
-gulp.task('default', ['script','watch']);
+gulp.task('default', ['script','css','watch']);
